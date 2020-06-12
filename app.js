@@ -88,6 +88,20 @@ app.put("/todos/:id", (req, res) => {
     });
 });
 
+app.delete("/todos/:id", (req, res) => {
+  const id = req.params.id;
+  db.none({
+    text: "delete from todolist where id=$1",
+    values: [id],
+  })
+    .then(() => {
+      console.log("deleted");
+      res.redirect("/todos");
+    })
+    .catch((error) => {
+      res.render("error.ejs", { errorMessage: error.message });
+    });
+});
 
 // handling bad routes
 app.get("*", (req, res) => {
