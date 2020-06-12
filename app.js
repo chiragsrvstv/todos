@@ -5,7 +5,7 @@ app.use(express.static("public"));
 app.use(express.json());
 
 //Parse URL-encoded bodies
-app.use(express.urlencoded()); 
+app.use(express.urlencoded());
 
 // server will listen for localhost
 app.listen(3000, function () {
@@ -27,8 +27,13 @@ app.get("/todos/new", (req, res) => {
 // creating a new todo
 app.post("/todos", (req, res) => {
   const todoName = req.body.todoName;
-    console.log(todoName);
+  console.log(todoName);
   // create a new todo in db here
 
   res.redirect("/todos");
+});
+
+// handling bad routes
+app.get("*", (req, res) => {
+  res.send("Error 404: Page Not Found");
 });
