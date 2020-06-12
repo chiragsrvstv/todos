@@ -6,7 +6,7 @@
     <% data.map((entry) => { %>
     <li><%= entry.title %> ---- <%= entry.category %></li>
     <a href="/todos/<%=entry.id%>/edit">Edit</a>
-    <a href="/todos/<%=entry.id%>/delete">Delete</a>
+    <a href="/todos/<%=entry.id%>">Delete</a>
     <% }); %>
   </ul>
 </div>
