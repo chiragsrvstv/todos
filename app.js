@@ -27,7 +27,9 @@ app.get("/todos/new", (req, res) => {
 // creating a new todo
 app.post("/todos", (req, res) => {
   const todoName = req.body.todoName;
+  const todoCategory = req.body.todoCategory;
   console.log(todoName);
+  console.log(todoCategory);
   // create a new todo in db here
 
   res.redirect("/todos");
