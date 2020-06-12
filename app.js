@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+const db = require("./db/config.js");
+
 app.use(express.static("public"));
 app.use(express.json());
 
@@ -17,7 +19,13 @@ app.get("/", (req, res) => {
 });
 
 app.get("/todos", (req, res) => {
+    console.log(process.env.DB_USER);
   res.render("todos.ejs");
+  db.any("SELECT * FROM todolist")
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => console.log(error));
 });
 
 app.get("/todos/new", (req, res) => {
