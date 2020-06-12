@@ -1,5 +1,12 @@
 <div class="container">
-    <h1> Welcome </h1>
-    <h3> List of all Todos </h3>
-    <a href="/todos/new"> Create New Todo </a>
-  </div>
+  <h1>Welcome</h1>
+  <h3>List of all Todos</h3>
+  <a href="/todos/new"> Create New Todo </a>
+  <ul>
+    <% data.map((entry) => { %>
+    <li><%= entry.title %> ---- <%= entry.category %></li>
+    <a href="/todos/<%=entry.id%>/edit">Edit</a>
+    <a href="/todos/<%=entry.id%>/delete">Delete</a>
+    <% }); %>
+  </ul>
+</div>
