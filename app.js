@@ -19,13 +19,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/todos", (req, res) => {
-    console.log(process.env.DB_USER);
-  res.render("todos.ejs");
   db.any("SELECT * FROM todolist")
     .then((data) => {
-      console.log(data);
+      // console.log(data);
+      res.render("todos.ejs", { data: data });
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      const errorMessage = "DATABASE NOT CONNECTED: " + error.message;
+      res.render("error.ejs", { errorMessage: errorMessage });
+    });
 });
 
 app.get("/todos/new", (req, res) => {
@@ -36,10 +38,18 @@ app.get("/todos/new", (req, res) => {
 app.post("/todos", (req, res) => {
   const todoName = req.body.todoName;
   const todoCategory = req.body.todoCategory;
-  console.log(todoName);
-  console.log(todoCategory);
-  // create a new todo in db here
 
+  // insert a new todo in db here
+  db.none({
+    text: "INSERT INTO todoList(title, category) VALUES($1, $2)",
+    values: [todoName, todoCategory],
+  })
+    .then(() => {
+      console.log("Created")
+    })
+    .catch((error) => {
+      res.render("error.ejs", { errorMessage: error.message });
+    });
   res.redirect("/todos");
 });
 
