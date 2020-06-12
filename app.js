@@ -9,5 +9,10 @@ app.listen(3000, function () {
 });
 
 app.get('/', (req, res) => {
-    res.send("Todos Home")
+    res.redirect('/todos')
 })
+
+app.get("/todos", (req, res) => {
+    res.render("todos.ejs")
+})
+
