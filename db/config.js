@@ -7,7 +7,7 @@ const pgp = require('pg-promise')();
 const connection = {
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
-    database: process.env.DB_DATABASE_NAME,
+    database: 'todolist',
     port: process.env.DB_DBPORT,
     
 }
