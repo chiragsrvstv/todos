@@ -60,20 +60,25 @@ EXECUTE PROCEDURE trigger_set_timestamp();
 
 ```
 
-5. After all the above steps the schema should be defined as:
+6. After all the above steps the schema should be defined as shown below: <br>
+   Check the database schema by running `\d+ todolist`.
 
 ```
 
- Table "public.todolist"
-  Column  |       Type        | Collation | Nullable |               Default                | Storage  | Stats target | Description 
-----------+-------------------+-----------+----------+--------------------------------------+----------+--------------+-------------
- id       | integer           |           | not null | nextval('todolist_id_seq'::regclass) | plain    |              | 
- title    | character varying |           | not null |                                      | extended |              | 
- category | character varying |           | not null |                                      | extended |              | 
+                                                            Table "public.todolist"
+   Column   |           Type           | Collation | Nullable |               Default                | Storage  | Stats target | Description 
+------------+--------------------------+-----------+----------+--------------------------------------+----------+--------------+-------------
+ id         | integer                  |           | not null | nextval('todolist_id_seq'::regclass) | plain    |              | 
+ title      | character varying(100)   |           | not null |                                      | extended |              | 
+ category   | character varying(50)    |           | not null |                                      | extended |              | 
+ status     | character varying(20)    |           | not null |                                      | extended |              | 
+ created_at | timestamp with time zone |           | not null | now()                                | plain    |              | 
+ updated_at | timestamp with time zone |           | not null | now()                                | plain    |              | 
 Indexes:
     "todolist_pkey" PRIMARY KEY, btree (id)
+Triggers:
+    set_timestamp BEFORE UPDATE ON todolist FOR EACH ROW EXECUTE FUNCTION trigger_set_timestamp()
 Access method: heap
-
 
 
 ```
