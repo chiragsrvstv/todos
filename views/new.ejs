@@ -1,7 +1,14 @@
+<%- include ('partials/header.ejs') %>
+
 <div class="container">
   <h3>Create a todo</h3>
   <form action="/todos" method="POST">
-    <input type="text" name="todoName" placeholder="Create a New Todo" required/>
+    <input
+      type="text"
+      name="todoName"
+      placeholder="Create a New Todo"
+      required
+    />
     <div>
       <label for="todoCategory">Choose a category:</label>
       <select name="todoCategory" required>
@@ -13,3 +20,5 @@
     <button type="submit" name="TdoSubmitButton">Create</button>
   </form>
 </div>
+
+<%- include ('partials/footer.ejs') %>

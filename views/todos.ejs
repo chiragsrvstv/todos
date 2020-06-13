@@ -1,22 +1,27 @@
+<%- include ('partials/header.ejs') %>
+
 <div class="container">
-  <h1>Welcome</h1>
+  <h1 clas="title">Welcome</h1>
   <h3>List of all Todos</h3>
   <a href="/todos/new"> Create New Todo </a>
   <ul>
     <% data.map((entry) => { %>
-    <li><%= entry.title %> ---- <%= entry.category %></li>
+    <li>
+      <%= entry.title %> ---- <%= entry.category %> ---- <%= entry.updated_at %>
+    </li>
     <a href="/todos/<%=entry.id%>/edit">Edit</a>
     <form action="/todos/<%=entry.id%>?_method=PUT" method="POST">
       <label for="status"> Completed </label>
-    <input type="checkbox" name="status" value="completed">
-    <input type="hidden" value="<%=entry.title%>" name="todoName">
-    <input type="hidden" value="<%=entry.category%>" name="todoCategory">
-    <button type="submit" name="statusButton"> Update Status </button>
+      <input type="checkbox" name="status" value="completed" />
+      <input type="hidden" value="<%=entry.title%>" name="todoName" />
+      <input type="hidden" value="<%=entry.category%>" name="todoCategory" />
+      <button type="submit" name="statusButton">Update Status</button>
     </form>
     <form action="/todos/<%=entry.id%>?_method=DELETE" method="POST">
-      <button type="submit" name="deleteButton"> Delete </button>
+      <button type="submit" name="deleteButton">Delete</button>
     </form>
     <% }); %>
   </ul>
 </div>
 
+<%- include ('partials/footer.ejs') %>
