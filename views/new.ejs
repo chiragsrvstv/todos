@@ -1,23 +1,26 @@
 <%- include ('partials/header.ejs') %>
 
 <div class="container">
-  <h3>Create a todo</h3>
+  <h3 class="title">Create A New Todo</h3>
   <form action="/todos" method="POST">
     <input
+    class="input"
       type="text"
       name="todoName"
       placeholder="Create a New Todo"
       required
     />
     <div>
-      <label for="todoCategory">Choose a category:</label>
-      <select name="todoCategory" required>
-        <option value="Normal" selected> Normal </option>
-        <option value="Urgent"> Urgent </option>
-        <option value="Today"> Today </option>
-      </select>
+      <label class="label" for="todoCategory">Choose a category:</label>
+      <div class="select">
+        <select name="todoCategory" required>
+          <option value="Normal" selected> Normal </option>
+          <option value="Urgent"> Urgent </option>
+          <option value="Today"> Today </option>
+        </select>
+      </div>
     </div>
-    <button type="submit" name="TdoSubmitButton">Create</button>
+    <button class="button is-primary is-medium" type="submit" name="TdoSubmitButton">Create</button>
   </form>
 </div>
 

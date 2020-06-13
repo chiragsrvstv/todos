@@ -1,21 +1,27 @@
 <%- include ('partials/header.ejs') %>
 
-<h1> Edit </h1>
+<div class="container">
+    <h1 class="title"> Edit Todo </h1>
+    
 
-<form action="/todos/<%=data.id%>?_method=PUT" method="POST">
-    <input type="text" name="todoName" value="<%=data.title%>" required/>
-    <div>
-      <label for="todoCategory">Choose a category:</label>
-      <select name="todoCategory" required>
-        <option value="Normal" selected> Normal </option>
-        <option value="Urgent"> Urgent </option>
-        <option value="Today"> Today </option>
-      </select>
+      <form class="field" action="/todos/<%=data.id%>?_method=PUT" method="POST">
+          <input class="input" type="text" name="todoName" value="<%=data.title%>" required/>
+          <div clas="control">
+            <label class="label" for="todoCategory">Choose a category:</label>
+            <div class="select">
+              <select name="todoCategory" required>
+                <option value="Normal" selected> Normal </option>
+                <option value="Today"> Today </option>
+                <option value="Urgent"> Urgent </option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <button class="button is-primary is-medium" type="submit" name="TdoSubmitButton">Edit</button>
+          </div>
+        </form>
     </div>
-    <label for="status"> Completed </label>
-    <input type="checkbox" name="status" value="completed">
-    <button type="submit" name="TdoSubmitButton">Edit</button>
-  </form>
+
 </div>
 
 <%- include ('partials/footer.ejs') %>

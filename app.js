@@ -22,11 +22,16 @@ app.get("/", (req, res) => {
   res.redirect("/todos");
 });
 
+// show todos
 app.get("/todos", (req, res) => {
   db.any("SELECT * FROM todolist")
     .then((data) => {
       // console.log(data);
-      res.render("todos.ejs", { data: data });
+      const updateDates = [];
+      data.forEach((entry) => {
+        updateDates.push(entry.updated_at);
+      });
+      res.render("todos.ejs", { data: data, updateDates: updateDates });
     })
     .catch((error) => {
       const errorMessage = "DATABASE NOT CONNECTED: " + error.message;
@@ -42,7 +47,7 @@ app.get("/todos/new", (req, res) => {
 app.post("/todos", (req, res) => {
   const todoName = req.body.todoName;
   const todoCategory = req.body.todoCategory;
-  const initialStatus = "not completed"
+  const initialStatus = "not completed";
 
   // insert a new todo in db here
   db.none({
