@@ -42,11 +42,12 @@ app.get("/todos/new", (req, res) => {
 app.post("/todos", (req, res) => {
   const todoName = req.body.todoName;
   const todoCategory = req.body.todoCategory;
+  const initialStatus = "not completed"
 
   // insert a new todo in db here
   db.none({
-    text: "INSERT INTO todoList(title, category) VALUES($1, $2)",
-    values: [todoName, todoCategory],
+    text: "INSERT INTO todoList(title, category, status) VALUES($1, $2, $3)",
+    values: [todoName, todoCategory, initialStatus],
   })
     .then(() => {
       console.log("Created");
@@ -75,10 +76,11 @@ app.get("/todos/:id/edit", (req, res) => {
 app.put("/todos/:id", (req, res) => {
   const todoName = req.body.todoName;
   const todoCategory = req.body.todoCategory;
+  const status = req.body.status || "not completed";
   const id = req.params.id;
   db.none({
-    text: "update todolist set title=$1, category=$2 where id=$3",
-    values: [todoName, todoCategory, id],
+    text: "update todolist set title=$1, category=$2, status=$3 where id=$4",
+    values: [todoName, todoCategory, status, id],
   })
     .then(() => {
       res.redirect("/todos");

@@ -6,9 +6,17 @@
     <% data.map((entry) => { %>
     <li><%= entry.title %> ---- <%= entry.category %></li>
     <a href="/todos/<%=entry.id%>/edit">Edit</a>
+    <form action="/todos/<%=entry.id%>?_method=PUT" method="POST">
+      <label for="status"> Completed </label>
+    <input type="checkbox" name="status" value="completed">
+    <input type="hidden" value="<%=entry.title%>" name="todoName">
+    <input type="hidden" value="<%=entry.category%>" name="todoCategory">
+    <button type="submit" name="statusButton"> Update Status </button>
+    </form>
     <form action="/todos/<%=entry.id%>?_method=DELETE" method="POST">
       <button type="submit" name="deleteButton"> Delete </button>
     </form>
     <% }); %>
   </ul>
 </div>
+
